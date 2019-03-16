@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MediaList</string>
+    <string name="title">Title</string>
+    <string name="description">A quick brown fox jumps over the lazy dog. This is a description.</string>
+    <string name="duration">0</string>
+</resources>
