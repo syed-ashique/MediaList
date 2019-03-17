@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -27,7 +29,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     private PlayerView playerView;
     private boolean playWhenReady = true;
     private int currentWindow = 0;
-    private long playbackPosition = 0;
+    private long playbackPosition = 15;
     private SimpleExoPlayer player;
 
     //TODO handle configuration change
@@ -59,7 +61,12 @@ public class MediaPlayerActivity extends AppCompatActivity {
             url = intent.getStringExtra(MainActivity.MEDIA_URL);
             Log.d(Constant.TAG, url);
         }
-        //TODO handle url empty case
+
+        if (TextUtils.isEmpty(url))  {
+            finish();
+            Toast.makeText(getApplicationContext(), "Sorry! video not found", Toast.LENGTH_SHORT).show();
+        }
+g
         Uri uri = Uri.parse(url);
         MediaSource mediaSource = new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
 
