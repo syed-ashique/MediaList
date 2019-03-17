@@ -66,7 +66,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
             finish();
             Toast.makeText(getApplicationContext(), "Sorry! video not found", Toast.LENGTH_SHORT).show();
         }
-g
+
         Uri uri = Uri.parse(url);
         MediaSource mediaSource = new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
 
