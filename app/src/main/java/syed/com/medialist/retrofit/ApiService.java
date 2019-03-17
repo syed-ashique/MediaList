@@ -1,4 +1,4 @@
-package syed.com.medialist.dao;
+package syed.com.medialist.retrofit;
 
 import java.util.List;
 

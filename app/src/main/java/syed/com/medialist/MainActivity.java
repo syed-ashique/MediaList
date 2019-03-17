@@ -20,10 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     MediaViewModel mMediaViewModel;
     public static final String MEDIA_URL = "MEDIA_URL";
-//    private DataSource.Factory dataSourceFactory;
-//    private SimpleExoPlayer player;
-//
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mMediaViewModel = ViewModelProviders.of(this).get(MediaViewModel.class);
-        mMediaViewModel.getMediaList().observe(this, new Observer<List<Media>>() {
-            @Override
-            public void onChanged(@Nullable List<Media> mediaList) {
-                adapter.setMediaList(mediaList);
-            }
-        });
-
-
+        if (mMediaViewModel != null || mMediaViewModel.getMediaList() != null) {
+            mMediaViewModel.getMediaList().observe(this, new Observer<List<Media>>() {
+                @Override
+                public void onChanged(@Nullable List<Media> mediaList) {
+                    adapter.setMediaList(mediaList);
+                }
+            });
+        }
     }
 }

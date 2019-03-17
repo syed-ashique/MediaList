@@ -30,20 +30,13 @@ public class MediaListAdapter extends RecyclerView.Adapter<MediaListAdapter.Medi
     @NonNull
     @Override
     public MediaViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new MediaViewHolder(mLayoutInflater.inflate(R.layout.list_item, viewGroup, false));
+        return new MediaViewHolder(mLayoutInflater.inflate(R.layout.list_item, viewGroup, false), mOnItemClickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MediaViewHolder mediaViewHolder, int i) {
         if (mMediaList != null) {
-            mediaViewHolder.title.setText(mMediaList.get(i).getTitle());
-            mediaViewHolder.description.setText(mMediaList.get(i).getDescription());
-            mediaViewHolder.duration.setText("" + mMediaList.get(i).getDuration());
-            mediaViewHolder.setListener(mOnItemClickListener);
             mediaViewHolder.setMedia(mMediaList.get(i));
-
-            Picasso.get().load(mMediaList.get(i).getThumbnail()).placeholder(R.mipmap.ic_launcher)
-                    .error(R.mipmap.ic_launcher).into(mediaViewHolder.thumbnail);
         }
     }
 
@@ -66,30 +59,33 @@ public class MediaListAdapter extends RecyclerView.Adapter<MediaListAdapter.Medi
         TextView description;
         TextView duration;
         Media media;
-        MediaOnItemClickListener listener;
+        MediaOnItemClickListener itemClickListener;
 
-        public MediaViewHolder(@NonNull View itemView) {
+        public MediaViewHolder(@NonNull View itemView, MediaOnItemClickListener listener) {
             super(itemView);
 
             thumbnail = itemView.findViewById(R.id.thumbnail);
             title = itemView.findViewById(R.id.title);
             description = itemView.findViewById(R.id.description);
             duration = itemView.findViewById(R.id.duration);
+            itemClickListener = listener;
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClickListener(v, media);
+                    itemClickListener.onItemClickListener(v, media);
                 }
             });
         }
 
-        public void setListener(MediaOnItemClickListener listener) {
-            this.listener = listener;
-        }
-
         public void setMedia(Media media) {
             this.media = media;
+            title.setText(media.getTitle());
+            description.setText(media.getDescription());
+            duration.setText("" + media.getDuration());
+
+            Picasso.get().load(media.getThumbnail()).placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher).into(thumbnail);
         }
     }
 

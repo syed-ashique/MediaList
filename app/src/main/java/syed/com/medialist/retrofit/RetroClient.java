@@ -2,7 +2,6 @@ package syed.com.medialist.retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import syed.com.medialist.dao.ApiService;
 
 public class RetroClient {
 
@@ -16,11 +15,6 @@ public class RetroClient {
                 .build();
     }
 
-    /**
-     * Get API Service
-     *
-     * @return API Service
-     */
     public static ApiService getApiService() {
         return getRetrofitInstance().create(ApiService.class);
     }
