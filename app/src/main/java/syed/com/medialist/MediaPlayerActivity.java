@@ -29,7 +29,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     private PlayerView playerView;
     private boolean playWhenReady = true;
     private int currentWindow = 0;
-    private long playbackPosition = 15;
+    private long playbackPosition = 0;
     private SimpleExoPlayer player;
 
     //TODO handle configuration change
